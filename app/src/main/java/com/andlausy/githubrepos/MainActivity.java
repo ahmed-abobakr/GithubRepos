@@ -1,9 +1,11 @@
 package com.andlausy.githubrepos;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.andlausy.githubrepos.base.mvp.view.BaseViewOnlyActivity;
+
+public class MainActivity extends BaseViewOnlyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
