@@ -25,16 +25,9 @@ public class BaseViewOnlyActivity extends DaggerAppCompatActivity implements Bas
 
 
 
-    private List<String> fragments;
-    private MaterialDialog createNewRequestSuccessDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-
-        fragments = new ArrayList<>();
     }
 
     @Override
@@ -66,18 +59,6 @@ public class BaseViewOnlyActivity extends DaggerAppCompatActivity implements Bas
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(id, fragment);
         transaction.addToBackStack(tag);
-        if(fragments.size() > 0) {
-            for (String str : fragments) {
-                if (str.equalsIgnoreCase(tag)) {
-                    break;
-                } else {
-                    if (fragments.indexOf(str) == (fragments.size() - 1))
-                        fragments.add(tag);
-                }
-            }
-        }else {
-            fragments.add(tag);
-        }
 
         transaction.commit();
     }
@@ -88,18 +69,10 @@ public class BaseViewOnlyActivity extends DaggerAppCompatActivity implements Bas
 
     @Override
     public void onBackPressed() {
-
-
-        if(getSupportActionBar() != null)
-            this.getSupportActionBar().setSubtitle(null);
-        if(fragments.size() > 1) {
-            fragments.remove((fragments.size() - 1));
-            getFragmentManager().popBackStackImmediate(fragments.get((fragments.size() - 1)), 0);
-        }else
+        if(getSupportFragmentManager().getBackStackEntryCount() > 1)
+            getSupportFragmentManager().popBackStack();
+        else
             super.finish();
-
-
-
     }
 
 
