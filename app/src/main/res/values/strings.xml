@@ -8,4 +8,5 @@
     <string name="empty_search_error_message">you should enter the repo name for the search</string>
     <string name="description_s">Description: %s</string>
     <string name="forks_s">Forks: %s</string>
+    <string name="num_of_subscribers_s">Num Of Subscribers: %s</string>
 </resources>

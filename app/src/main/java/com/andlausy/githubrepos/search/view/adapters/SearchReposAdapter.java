@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SearchReposAdapter extends RecyclerView.Adapter<SearchReposAdapter.SearchReposHolder> {
 
     List<Item> itemList;
+    RepoItemClickListener listener;
 
     @NonNull
     @Override
@@ -35,6 +36,9 @@ public class SearchReposAdapter extends RecyclerView.Adapter<SearchReposAdapter.
                         itemList.get(position).getDescription()));
         holder.txtForks.setText(String.format(holder.itemView.getContext().getResources().getString(R.string.forks_s),
                     itemList.get(position).getForks().toString()));
+
+        holder.itemView.setOnClickListener(view -> listener.repoClicked(itemList.get(position).getName(),
+                    itemList.get(position).getSubscribersUrl()));
     }
 
     @Override
@@ -45,8 +49,9 @@ public class SearchReposAdapter extends RecyclerView.Adapter<SearchReposAdapter.
             return itemList.size();
     }
 
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(List<Item> itemList, RepoItemClickListener listener) {
         this.itemList = itemList;
+        this.listener = listener;
         notifyDataSetChanged();
     }
 
@@ -63,5 +68,9 @@ public class SearchReposAdapter extends RecyclerView.Adapter<SearchReposAdapter.
             txtDesc = itemView.findViewById(R.id.adapter_search_repos_text_desc);
             txtForks = itemView.findViewById(R.id.adapter_search_repos_text_forks);
         }
+    }
+
+    public interface RepoItemClickListener{
+        void repoClicked(String repoName, String subscriberURL);
     }
 }

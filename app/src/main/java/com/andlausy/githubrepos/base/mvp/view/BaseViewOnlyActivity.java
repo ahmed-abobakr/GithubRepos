@@ -62,7 +62,7 @@ public class BaseViewOnlyActivity extends DaggerAppCompatActivity implements Bas
         Toast.makeText(this, R.string.unknown_error_message, Toast.LENGTH_LONG).show();
     }
 
-    protected void loadFragment(Fragment fragment, int id, String tag){
+    public void loadFragment(Fragment fragment, int id, String tag){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(id, fragment);
         transaction.addToBackStack(tag);

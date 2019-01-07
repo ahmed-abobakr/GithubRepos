@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.Button;
 
 import com.andlausy.githubrepos.R;
+import com.andlausy.githubrepos.base.mvp.view.BaseActivity;
 import com.andlausy.githubrepos.base.mvp.view.BaseFragment;
+import com.andlausy.githubrepos.base.mvp.view.BaseViewOnlyActivity;
 import com.andlausy.githubrepos.base.mvp.view.BaseViewOnlyFragment;
+import com.andlausy.githubrepos.repo_details.views.fragments.RepositoryDetailFragment;
 import com.andlausy.githubrepos.search.data.models.Item;
 import com.andlausy.githubrepos.search.view.adapters.SearchReposAdapter;
 import com.andlausy.githubrepos.search.view.presenter.SearchContract;
 import com.andlausy.githubrepos.search.view.presenter.SearchPresenterImpl;
+import com.andlausy.githubrepos.utils.Constants;
 
 import java.util.List;
 
@@ -26,7 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SearchFragment extends BaseFragment<SearchPresenterImpl> implements SearchContract.SearchView {
+public class SearchFragment extends BaseFragment<SearchPresenterImpl> implements SearchContract.SearchView,
+        SearchReposAdapter.RepoItemClickListener {
 
     @Inject
     SearchPresenterImpl presenter;
@@ -70,6 +75,16 @@ public class SearchFragment extends BaseFragment<SearchPresenterImpl> implements
 
     @Override
     public void setSearchData(List<Item> searchData) {
-        adapter.setItemList(searchData);
+        adapter.setItemList(searchData, this);
+    }
+
+    @Override
+    public void repoClicked(String repoName, String subscriberURL) {
+        RepositoryDetailFragment fragment = new RepositoryDetailFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.REPO_NAME, repoName);
+        args.putString(Constants.REPO_SUBSCRIBERS_URL, subscriberURL);
+        fragment.setArguments(args);
+        ((BaseViewOnlyActivity) getActivity()).loadFragment(fragment, R.id.frame_container, "repo_detail");
     }
 }
