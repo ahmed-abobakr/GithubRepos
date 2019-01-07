@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class AppModule {
 
-    private final String BASE_URL = "http://mobile.sehatyonline.com/";
+    private final String BASE_URL = "https://api.github.com";
 
     @Provides
     @Singleton
@@ -38,8 +38,6 @@ public class AppModule {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request request = chain.request();
             Request.Builder requestBuilder = request.newBuilder();
-            /*requestBuilder.addHeader(APP_AUTH_HEADER, APP_AUTH_HEADER_VALUE);
-            requestBuilder.addHeader("LANG", getDefaultLanguage.getLocaleLanguage());*/
             return chain.proceed(requestBuilder.build());
         }).addInterceptor(httpLoggingInterceptor)
                 .cache(cache);
