@@ -10,18 +10,20 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
+import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AppModule.class})
-public interface AppComponent {
+@Component(modules = {AndroidSupportInjectionModule.class, AppModule.class, ActivityBuilder.class, FragmentBuilder.class})
+public interface AppComponent extends AndroidInjector<GithubReposApp>{
 
     void inject(GithubReposApp app);
 
     @Component.Builder
-    interface Builder{
+    interface Builder  {
         @BindsInstance
-        Builder application(DaggerApplication application);
+        Builder application(GithubReposApp application);
 
         AppComponent build();
     }

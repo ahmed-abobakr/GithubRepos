@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.andlausy.githubrepos.GithubReposApp;
 import com.andlausy.githubrepos.base.data.BaseCloud;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +15,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.android.DaggerApplication;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +31,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Context provideContext(Application application) {
+    Context provideContext(GithubReposApp application) {
         return application;
     }
 
@@ -103,4 +105,8 @@ public class AppModule {
     GsonConverterFactory gsonConverterFactory(Gson gson){
         return GsonConverterFactory.create(gson);
     }
+
+
+
+
 }

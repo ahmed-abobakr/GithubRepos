@@ -1,12 +1,10 @@
 package com.andlausy.githubrepos.base.mvp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.andlausy.githubrepos.MainActivity;
 import com.andlausy.githubrepos.R;
 import com.andlausy.githubrepos.base.mvp.view.widget.BlockingLoadingView;
 
@@ -16,10 +14,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class BaseViewOnlyActivity extends DaggerAppCompatActivity implements BaseView {

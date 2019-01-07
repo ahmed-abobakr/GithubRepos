@@ -4,4 +4,8 @@
     <string name="network_error_message">Network Error</string>
     <string name="unknown_error_message">Unknown Error</string>
     <string name="loading_message">Loading</string>
+    <string name="search_hint">Search</string>
+    <string name="empty_search_error_message">you should enter the repo name for the search</string>
+    <string name="description_s">Description: %s</string>
+    <string name="forks_s">Forks: %s</string>
 </resources>
